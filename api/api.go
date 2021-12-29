@@ -38,15 +38,15 @@ func (api *API) Initialize(host string) *mux.Router {
 		Subrouter()
 
 	info_subrouter.
-		HandleFunc("", api.informationGeneralHandler)
-
-	info_subrouter.
 		Headers("request-type", "body").
 		HandlerFunc(api.informationBodyHandler)
 
 	info_subrouter.
 		HandleFunc("/{category:[a-z A-Z]+}", api.informationQueryHandler).
 		Name("category")
+
+	info_subrouter.
+		HandleFunc("", api.informationGeneralHandler)
 
 	return &api.router
 }
