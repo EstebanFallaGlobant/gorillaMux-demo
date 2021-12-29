@@ -26,13 +26,13 @@ func main() {
 		WriteTimeout: time.Second * 15,
 		ReadTimeout:  time.Second * 15,
 		IdleTimeout:  time.Second * 60,
-		Handler:      api.Initialize(),
+		Handler:      api.Initialize(dir),
 	}
 
 	go func() {
 		logger.Printf("Server starting at: %s\n", svr.Addr)
 		if msg, err := api.GetHealthURL(); err == nil {
-			logger.Printf("For health information: %s%s\n", dir, msg)
+			logger.Printf("For health information: %s\n", msg)
 		}
 
 		if err := svr.ListenAndServe(); err != nil {
